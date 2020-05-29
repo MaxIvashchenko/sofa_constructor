@@ -274,7 +274,7 @@ class ChessBoard extends Component {
 					// sofa.splice(colIndex+2 , 1);
 				} else {
 				console.log('wefkwelknfk')
-				sofa.splice(colIndex-1, 1);
+				sofa.splice(colIndex+1, 1);
 
 					sofa.splice(colIndex, 0, newEmptySection);
 					// sofa.splice(colIndex+2, 1);
