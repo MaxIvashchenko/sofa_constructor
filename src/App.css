@@ -18,10 +18,6 @@
   background-size: 100% 100%;
 }
 
-* {
-  font-family: 'Oxygen', sans-serif;
-}
-
 .board {
   margin: auto 0;
 }
@@ -30,7 +26,7 @@
   display: flex;
   justify-content: space-around;
   margin: auto 20%;
-  padding-bottom: 120px;
+  /* padding-bottom: 120px; */
   overflow: scroll;
 }
 
@@ -40,25 +36,34 @@
   justify-content: space-around;
   margin: auto 20%;
   /* background-color: antiquewhite; */
-  padding-bottom: 120px;
+  /* padding-bottom: 120px; */
 }
 
 .row3 {
+  position: relative;
+  z-index: 10;
   display: flex;
   /* width: 400px; */
   margin: 0 auto;
   justify-content: center;
   /* padding-bottom: 120px; */
   /* justify-content: center; */
-  position: absolute;
-  width: 400px;
-  height: 312px;
+  /* position: absolute; */
+  /* width: 400px;
+  height: 312px; */
   /* background: url('./images/sofa.png'); */
-  background-size: 100% 100%;
+  /* background-size: 100% 100%; */
 }
 
-.row3:hover {
-  /* background: none; */
+.square {
+  width: 200px;
+  height: 300px;
+}
+
+.squareRow2 {
+  width: 100px;
+  height: 300px;
+  padding-bottom: 20px;
 }
 
 .squareRow3 {
@@ -66,7 +71,7 @@
   height: 300px;
   outline: 1px dashed rgb(58, 88, 187);
   /* outline-offset: -2px; */
-  /* box-sizing: border-box; */
+  box-sizing: border-box;
 }
 
 .onSquare {
@@ -85,17 +90,6 @@
   background-color: rgb(55, 24, 65);
 }
 
-.square {
-  width: 200px;
-  height: 300px;
-  /* background-color: #ffce9e; */
-}
-
-.squareRow2 {
-  width: 100px;
-  height: 300px;
-}
-
 .piece {
   font-size: 60px;
   text-align: center;
@@ -107,33 +101,29 @@
   background-size: 100% 100%; */
 }
 
-.cube {
-  perspective: 450px;
-  position: relative;
-  margin: 0 auto;
-}
-
 .top {
   position: absolute;
   z-index: 1;
-  height: 300px;
+  background-color: blue;
+  height: 100px;
   box-shadow: 0 0 40px -10px;
-  opacity: 1;
+  opacity: 0.1;
   border: 1px dashed black;
   -webkit-transform: rotateX(-80deg);
   -webkit-transform-origin: top;
 }
 
 .bottom {
+  top: 300px;
   position: absolute;
   z-index: 1;
   background-color: blue;
-  height: 298px;
-  box-shadow: 0 0 40px -10px;
-  opacity: 0.2;
+  height: 100px;
+  box-shadow: 0 0 40px 10px;
+  opacity: 0.1;
   border: 1px dashed black;
-  -webkit-transform: rotateX(110deg);
-  -webkit-transform-origin: bottom;
+  -webkit-transform: rotateX(-80deg);
+  -webkit-transform-origin: top;
 }
 
 .dragging {
@@ -154,28 +144,44 @@
 
 .left {
   position: absolute;
-  width: 300px;
-  height: 300px;
-  box-shadow: inset 0 0 40px -10px rgba(0, 0, 0, 1);
-  opacity: 1;
+  background-color: blue;
+  height: 298px;
+  width: 80px;
+  /* box-shadow: inset 0 0 40px -10px rgba(0, 0, 0, 1); */
+  opacity: 0.5;
   border: 1px solid black;
-  -webkit-transform: rotateY(50deg);
+  -webkit-transform: translateX(-2px) rotateY(70deg);
   -webkit-transform-origin: left;
 }
 
 .right {
+  background-color: blue;
   position: absolute;
-  width: 200px;
-  height: 200px;
+  right: 0;
+  height: 298px;
+  width: 80px;
+
   box-shadow: inset 0 0 40px -10px rgba(0, 0, 0, 0.2);
   opacity: 0.5;
   border: 1px solid gold;
-  -webkit-transform: translateX(200px) rotateY(90deg);
-  -webkit-transform-origin: left;
+  -webkit-transform: translateX(0) rotateY(-70deg);
+  -webkit-transform-origin: right;
 }
 
 .resting {
   background-color: black;
   width: 50px;
   height: 50px;
+}
+
+.underCube {
+  z-index: 1;
+  border: 1px solid;
+  position: absolute;
+  left: 0;
+}
+
+.cube {
+  perspective: 400px;
+  /* position:  relative; */
 }

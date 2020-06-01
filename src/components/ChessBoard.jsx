@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react';
+import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import { Container, Draggable } from 'react-smooth-dnd';
 
@@ -10,8 +10,8 @@ class ChessBoard extends Component {
 		this.renderPiece = this.renderPiece.bind(this);
 		this.sofaLength = this.sofaLength.bind(this);
 		this.handleMouseMove = this.handleMouseMove.bind(this);
-		this.withing = 800;
-		this.newCapacity = 8;
+		this.newCapacity = 9;
+		this.withing = this.newCapacity * 100;
 		this.prevSofa = [];
 		this.activeSectionSize = null;
 
@@ -29,7 +29,7 @@ class ChessBoard extends Component {
 					{ type: 'knight', side: "black", data: '13', stylish: 'odin', size: 1, id: 'black-1-2', model: 'model-3' },
 					{ type: 'knight', side: "black", data: '14', stylish: 'odin', size: 1, id: 'black-1-3', model: 'model-4' },
 				],
-				this.sofaLength(8)
+				this.sofaLength(this.newCapacity)
 			],
 			x: 0,
 			colonka: null
@@ -43,17 +43,17 @@ class ChessBoard extends Component {
 		return arr
 	}
 	renderPiece(piece, rowIndex, colIndex, colonka) {
-		// console.log('colIndex', colonka)
+		// console.log('piece', piece)
 		const makeClass = () => {
 			if (rowIndex === 2) {
 
 				if (this.activeSectionSize === 1 && colonka !== null && this.state.board[2][colonka].size === 2) {
 					// console.log('one')
-					if (this.state.x < 100) {
-						console.log('left')
+					if (-1 <= this.state.x && this.state.x < 100) {
+						// console.log('left')
 						return (colonka !== colIndex) ? `piece ${piece.model}` : `piece ${piece.model} onSquareHalfRight`
 					} else {
-						console.log('right')
+						// console.log('right')
 						return (colonka !== colIndex) ? `piece ${piece.model}` : `piece ${piece.model} onSquareHalfLeft`
 					}
 				}
@@ -71,16 +71,25 @@ class ChessBoard extends Component {
 						return `piece ${piece.model}`
 					}
 				}
-				if (colonka !== null && this.activeSectionSize === 2 && this.state.board[2][colonka].size === 2 && this.state.x > 100) {
+				if (colonka !== null && this.activeSectionSize === 2 && this.state.board[2][colonka].size === 2 && this.state.x > 100 && this.state.board[2][colonka] && colonka !== this.state.board[2].length - 1) {
 					// console.log('--------hower')
-					if (colonka + 1 === colIndex) {
-						return `piece ${piece.model} onSquare`
-					} else if ((colonka === colIndex)) {
-						return `piece ${piece.model} onSquareHalfLeft`
+
+					if (this.state.board[2][colonka + 1] && this.state.board[2][colonka + 1].size === 2) {
+						if (colonka + 1 === colIndex) {
+							return `piece ${piece.model} onSquareHalfRight`
+						} else if ((colonka === colIndex)) {
+							return `piece ${piece.model} onSquareHalfLeft`
+						} else { return `piece ${piece.model}` }
 					} else {
-						return `piece ${piece.model}`
+						if (colonka + 1 === colIndex) {
+							return `piece ${piece.model} onSquare`
+						} else if ((colonka === colIndex)) {
+							return `piece ${piece.model} onSquareHalfLeft`
+						} else { return `piece ${piece.model}` }
 					}
+
 				}
+
 				// console.log('one')
 				if (colonka !== null && this.state.board[2][colonka].size === 2) {
 					// console.log('four')
@@ -105,7 +114,6 @@ class ChessBoard extends Component {
 					return (colonka !== colIndex) && (colonka !== colIndex - 1) ? `piece ${piece.model}` : `piece ${piece.model} onSquare`
 				}
 
-
 			} else {
 				return `piece ${piece.model}`
 			}
@@ -125,55 +133,66 @@ class ChessBoard extends Component {
 		// console.log('mouse_-------->', this.state.x)
 
 		return (
-			<div >
+			< >
+
 				{this.state.board.map((row, rowIndex) => {
 					if (rowIndex === 2) {
 						return (
-							<div className='cube' style={{ width: this.withing }}>
-								<div onMouseMove={this.handleMouseMove}
-									className="row3" style={{ width: this.withing }} key={rowIndex}>
-									{row.map((piece, colIndex) => {
-										return (
-											<div className='squareRow3 ' style={{ width: 100 * piece.size }} key={`${rowIndex}${colIndex}`}>
-												<Container
-													dragClass="nothing"
-													dropClass="dropping"
-													style={{ height: '100%' }}
-													behaviour="drop-zone"
-													animationDuration={1000}
-													onDrop={(result) => this.onDrop(result, rowIndex, colIndex)}
-													getChildPayload={() => ({ colIndex, rowIndex, piece })}
-													// onDragLeave={() => this.onDragLeave(rowIndex, colIndex)}
-													onDragEnter={() => this.onDragEnter(rowIndex, colIndex)}
-													onDropReady={(result) => this.onDropReady(result)}
-													shouldAcceptDrop={(_, payload) => this.shouldAcceptDrop(payload, rowIndex, colIndex)}
-												>
-													{this.renderPiece(piece, rowIndex, colIndex, this.state.colonka)}
-												</Container>
-											</div>
-										);
-									})}
+							// <div >
+							<div
+								onMouseMove={this.handleMouseMove}
+								className="row3"
+								style={{ width: this.withing }}
+								key={row + "-" + rowIndex}>
+								{row.map((piece, colIndex) => {
+									return (
+										<div className='squareRow3 ' style={{ width: 100 * piece.size }} key={`${rowIndex}${colIndex}`}>
+											<Container
+												// dragClass="nothing"
+												dropClass="dropping"
+												style={{ height: '100%' }}
+												behaviour="drop-zone"
+
+												// removeOnDropOut={() => this.removeOnDropOut(rowIndex, colIndex)}
+
+												// animationDuration={1000}
+												onDrop={(result) => this.onDrop(result, rowIndex, colIndex)}
+												getChildPayload={() => ({ colIndex, rowIndex, piece })}
+												// onDragLeave={() => this.onDragLeave(rowIndex, colIndex)}
+												onDragEnter={() => this.onDragEnter(rowIndex, colIndex)}
+												onDropReady={(result) => this.onDropReady(result)}
+												shouldAcceptDrop={(_, payload) => this.shouldAcceptDrop(payload, rowIndex, colIndex)}
+											>
+												{this.renderPiece(piece, rowIndex, colIndex, this.state.colonka)}
+											</Container>
+										</div>
+									);
+								})}
+								<div className="underCube">
+									<div className='cube' style={{ width: this.withing }}>
+										<div className="left"></div>
+										<div className="right"></div>
+										<div className="top" style={{ width: this.withing }}></div>
+										<div className="bottom" style={{ width: this.withing }}></div>
+									</div>
 								</div>
-								<div className="top" style={{ width: this.withing }}></div>
-								<div className="bottom" style={{ width: this.withing }}></div>
 							</div>
+
+							// </div>
 						);
 					}
 					if (rowIndex === 1) {
 						return (
 							<div className="row2" key={rowIndex}>
 								{row.map((piece, colIndex) => {
-
 									return (
 										<div className={`squareRow2 ${(rowIndex + colIndex) % 2 === 0 ? 'white' : 'black'}`}
 											key={`${rowIndex}${colIndex}`}>
 											<Container
 												dragClass="dragging"
-
 												style={{ height: '100%' }}
 												behaviour="move"
 												onDrop={(result) => this.onDrop(result, rowIndex, colIndex)}
-												// onDropReady={(result) => this.onDropReady(result)}
 												shouldAcceptDrop={(_, payload) => this.shouldAcceptDrop(payload, rowIndex, colIndex)}
 												getChildPayload={() => ({ colIndex, rowIndex, piece })}
 											>
@@ -213,10 +232,11 @@ class ChessBoard extends Component {
 						</>
 					);
 				})}
-			</div>
+			</>
 		);
 	}
 	handleMouseMove(event) {
+		// console.log(event.nativeEvent)
 		this.setState({
 			x: event.nativeEvent.offsetX
 		});
@@ -227,16 +247,17 @@ class ChessBoard extends Component {
 		this.setState({ colonka: colIndex });
 		// console.log('colIndex', colIndex)
 	}
-	// onDragLeave(rowIndex, colIndex) {
-	// 		// this.setState({ colonka: null });
-	// // this.forceUpdate()
+	// removeOnDropOut(rowIndex, colIndex) {
+
+	// 	console.log(rowIndex, colIndex)
+	// 	return true
 	// }
 
 	shouldAcceptDrop(payload, rowIndex, colIndex) {
 		const { colIndex: fromCol, rowIndex: fromRow } = payload;
 		const fromPiece = this.state.board[fromRow][fromCol];
 		const piece = this.state.board[rowIndex][colIndex];
-
+		// console.log('rowIndex', rowIndex)
 		if (fromPiece === piece) return true;
 		if (fromPiece.side === piece.side) return false;
 		if ((fromPiece.side === 'white') && (piece.side === 'black')) return false;
@@ -247,18 +268,26 @@ class ChessBoard extends Component {
 	onDropReady(result) {
 		this.prevSofa = Object.assign([], this.state.board[2]);
 		this.activeSectionSize = result.payload.piece.size;
-
 	}
 
 	onDrop(dropResult, rowIndex, colIndex) {
 		const { addedIndex, removedIndex, payload } = dropResult;
 		const sofa = this.state.board[2]
 		const newEmptySection = { data: 0, size: 1, side: "white" };
+
+		// console.log('dropResult', dropResult)
+		// console.log('rowIndex', rowIndex)
+		// console.log('colIndex', colIndex)
 		if (addedIndex !== null || removedIndex !== null) {
-			let copyItem = Object.assign({}, payload.piece);
+			const copyItem = Object.assign({}, payload.piece);
 			this.state.board[rowIndex][colIndex] = {};
 			this.state.board[rowIndex][colIndex] = copyItem;
 		}
+
+		// if (addedIndex === null && removedIndex === 0 && rowIndex === 2) {
+		// 	(payload.piece.size === 2) ? sofa.splice(colIndex, 1, newEmptySection, newEmptySection) : sofa.splice(colIndex, 1, newEmptySection);
+		// 	this.forceUpdate()
+		// } // удаляем вынося за шкаф
 
 		if (addedIndex !== null && removedIndex === null) {
 
@@ -268,18 +297,15 @@ class ChessBoard extends Component {
 			}
 			if (payload.piece.size === 2 && this.prevSofa[colIndex].size === 2 && this.state.x > 100) {
 
-				if (this.prevSofa[colIndex + 1].size === 2) {
+				if (this.state.board[2][colIndex + 1] && this.prevSofa[colIndex + 1].size === 2) {
 					console.log('klac')
 					sofa.splice(colIndex, 0, newEmptySection);
-					// sofa.splice(colIndex+2 , 1);
+					sofa.splice(colIndex + 2, 1, newEmptySection);
 				} else {
-				console.log('wefkwelknfk')
-				sofa.splice(colIndex+1, 1);
-
+					console.log('ono')
 					sofa.splice(colIndex, 0, newEmptySection);
-					// sofa.splice(colIndex+2, 1);
-					// sofa.splice(colIndex+1, 1);
-					// sofa.splice(colIndex , 1, newEmptySection);
+					sofa.splice(colIndex + 2, 1);
+
 				}
 			}
 
@@ -317,6 +343,7 @@ class ChessBoard extends Component {
 				}
 
 			}
+
 			this.setState(state => {
 				state.colonka = null
 				const row = this.state.board[2].map((section, i) => {
@@ -331,7 +358,6 @@ class ChessBoard extends Component {
 
 	componentDidUpdate(prevProps, prevState) {
 		this.newCapacity = this.state.board[2].reduce((sum, el) => sum + el.size, 0)
-
 	}
 
 }
