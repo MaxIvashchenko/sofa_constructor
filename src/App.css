@@ -46,13 +46,6 @@
   /* width: 400px; */
   margin: 0 auto;
   justify-content: center;
-  /* padding-bottom: 120px; */
-  /* justify-content: center; */
-  /* position: absolute; */
-  /* width: 400px;
-  height: 312px; */
-  /* background: url('./images/sofa.png'); */
-  /* background-size: 100% 100%; */
 }
 
 .square {
@@ -67,104 +60,123 @@
 }
 
 .squareRow3 {
+  /* z-index: 10; */
   width: 100px;
   height: 300px;
   outline: 1px dashed rgb(58, 88, 187);
   /* outline-offset: -2px; */
   box-sizing: border-box;
 }
+.squareRow3 .smooth-dnd-draggable-wrapper {
 
+}
 .onSquare {
-  background-color: rgb(222, 170, 238);
+  background-color: rgb(222, 170, 238, 0.5);
 }
 
 .onSquareHalfRight {
-  background: linear-gradient(to right, rgb(222, 170, 238) 50%, white 50%);
+  background: linear-gradient(to right, rgb(222, 170, 238, 0.5) 50%, rgb(58, 88, 187, 0) 50%);
 }
 
 .onSquareHalfLeft {
-  background: linear-gradient(to right, white 50%, rgb(222, 170, 238) 50%);
-}
-
-.halfHover {
-  background-color: rgb(55, 24, 65);
+  background: linear-gradient(to right, rgb(58, 88, 187, 0) 50%, rgb(222, 170, 238, 0.5) 50%);
 }
 
 .piece {
+  z-index: 10;
   font-size: 60px;
   text-align: center;
   height: 300px;
-  cursor: pointer;
+  cursor: grab;
   /* transition: opacity .2s ease;  */
   background-color: none;
   /* background: aliceblue url('./images/2.png');
   background-size: 100% 100%; */
 }
 
+.dragging {
+  /* background-color: blue; */
+  cursor: grabbing;
+  animation-name: blinker;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(1.0,0,0,1.0);
+  animation-duration: 1s;
+  -webkit-animation-name: blinker;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: cubic-bezier(1.0,0,0,1.0);
+  -webkit-animation-duration: 2s;
+}
+@-webkit-keyframes blinker {
+	0% {background-color: #ffffff;}
+	50% {background-color: rgba(124, 124, 124, 0.2)}
+	100% {background-color: #ffffff;}
+}
+ 
+@keyframes blinker {
+	0% {background-color: #ffffff;}
+	50% {background-color: rgba(124, 124, 124, 0.2)}
+	100% {background-color: #ffffff;}
+} 
+
+.nothing {
+  /* z-index: 999; */
+  /* background: none; */
+  /* display: none; */
+  /* transform: scale(0); */
+}
+
 .top {
   position: absolute;
-  z-index: 1;
-  background-color: blue;
+  /* z-index: 1; */
+  /* background-color: blue; */
+  outline: 1px dashed rgb(58, 88, 187);
   height: 100px;
   box-shadow: 0 0 40px -10px;
-  opacity: 0.1;
+  opacity: 0.4;
   border: 1px dashed black;
-  -webkit-transform: rotateX(-80deg);
+  -webkit-transform: rotateX(-90deg);
   -webkit-transform-origin: top;
 }
 
 .bottom {
   top: 300px;
   position: absolute;
-  z-index: 1;
+  /* z-index: 1; */
   background-color: blue;
   height: 100px;
-  box-shadow: 0 0 40px 10px;
-  opacity: 0.1;
+  box-shadow: 0 0 40px -10px;
+  opacity: 0.4;
   border: 1px dashed black;
-  -webkit-transform: rotateX(-80deg);
+  -webkit-transform: rotateX(-90deg);
   -webkit-transform-origin: top;
 }
+.bottom-hover{
+  background-color: rgb(94, 190, 245);
 
-.dragging {
-  background-color: blue;
-  cursor: none;
-}
-
-.nothing {
-  background: none;
-  /* display: none; */
-  transform: scale(0);
-}
-
-.sectionD {
-  perspective: 450px;
-  position: relative;
 }
 
 .left {
+  /* z-index: 1; */
   position: absolute;
-  background-color: blue;
-  height: 298px;
-  width: 80px;
-  /* box-shadow: inset 0 0 40px -10px rgba(0, 0, 0, 1); */
+  background-color: rgb(110, 110, 136);
+  height: 300px;
+  width: 100px;
+  box-shadow: inset 0 0 40px -10px rgb(88, 124, 192);
   opacity: 0.5;
-  border: 1px solid black;
-  -webkit-transform: translateX(-2px) rotateY(70deg);
+  -webkit-transform: rotateY(90deg);
   -webkit-transform-origin: left;
 }
 
 .right {
-  background-color: blue;
+  /* z-index: 1; */
+  background-color: rgb(110, 110, 136);
   position: absolute;
-  right: 0;
-  height: 298px;
-  width: 80px;
-
-  box-shadow: inset 0 0 40px -10px rgba(0, 0, 0, 0.2);
+  right: 0px;
+  height: 300px;
+  width: 100px;
+  box-shadow: inset 0 0 40px -10px rgb(88, 124, 192);
   opacity: 0.5;
-  border: 1px solid gold;
-  -webkit-transform: translateX(0) rotateY(-70deg);
+  -webkit-transform: translateX(0) rotateY(-90deg);
   -webkit-transform-origin: right;
 }
 
@@ -175,13 +187,20 @@
 }
 
 .underCube {
-  z-index: 1;
-  border: 1px solid;
+  /* z-index: 1; */
   position: absolute;
   left: 0;
+  height: 100%;
 }
 
 .cube {
+  /* z-index: 1; */
+  height: 100%;
   perspective: 400px;
-  /* position:  relative; */
+  position: relative;
+  border-bottom: 14px solid rgb(112, 112, 112);
+}
+
+.smooth-dnd-ghost {
+  z-index: 12;
 }
