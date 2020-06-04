@@ -146,6 +146,15 @@ class ChessBoard extends Component {
 								className="row3"
 								style={{ width: this.withing }}
 								key={row + "-" + rowIndex}>
+									<div className="underCube">
+									<div className='cube' style={{ width: this.withing }}>
+										<div className="left"></div>
+										<div className="right"></div>
+										<div className="top" style={{ width: this.withing }}></div>
+										<div className={this.dragging ? 'bottom bottom-hover' : 'bottom'}
+										style={{ width: this.withing }}></div>
+									</div>
+								</div>
 								{row.map((piece, colIndex) => {
 									return (
 										<div className='squareRow3 ' style={{ width: 100 * piece.size }} key={`${rowIndex}${colIndex}`}>
