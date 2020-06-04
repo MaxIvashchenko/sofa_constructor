@@ -181,15 +181,6 @@ class ChessBoard extends Component {
 										</div>
 									);
 								})}
-								{/* <div className="underCube">
-									<div className='cube' style={{ width: this.withing }}>
-										<div className="left"></div>
-										<div className="right"></div>
-										<div className="top" style={{ width: this.withing }}></div>
-										<div className={this.dragging ? 'bottom bottom-hover' : 'bottom'}
-										style={{ width: this.withing }}></div>
-									</div>
-								</div> */}
 							</div>
 
 						);
@@ -273,7 +264,7 @@ class ChessBoard extends Component {
 		const piece = this.state.board[rowIndex][colIndex];
 
 		if (fromPiece === piece) return true;
-		// if (fromPiece.side === piece.side) return false;
+		if (fromPiece.side === piece.side) return false;
 		if ((fromPiece.side === 'white') && (piece.side === 'black')) return false;
 		// if ((fromPiece.side === 'white') && (piece.side === 'white')) return true;
 
