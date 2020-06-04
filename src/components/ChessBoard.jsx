@@ -170,7 +170,7 @@ class ChessBoard extends Component {
 												// 	showOnTop: true,
 												// 	className: 'cards-drop-preview'
 												// }}
-
+												// animationDuration={1000}
 												onDragEnd={() => this.onDragEnd(rowIndex, colIndex)}
 												onDragEnter={() => this.onDragEnter(rowIndex, colIndex)}
 												onDropReady={(result) => this.onDropReady(result)}

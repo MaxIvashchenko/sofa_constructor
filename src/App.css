@@ -204,3 +204,9 @@
 .smooth-dnd-ghost {
   z-index: 12;
 }
+
+.dropping {
+/* padding-left: 100px; */
+position: absolute;
+  /* left: 50; */
+}
