@@ -2,7 +2,9 @@ import React from 'react';
 import './App.css';
 
 // import Tess from './components/Tess';
-import ChessBoard from './components/ChessBoard';
+import Stage2 from './components/Stage2';
+import Stage1 from './components/Stage1';
+import Lines from './components/Lines';
 // import Mybox from './components/Mybox';
 
 
@@ -11,9 +13,10 @@ function App() {
   return (
     <>
      
-
+{/* <Stage1 /> */}
       {/* <Tess /> */}
-      <ChessBoard />
+      <Stage2 />
+      {/* <Lines /> */}
     </>
   );
 }

@@ -18,6 +18,17 @@
   background-size: 100% 100%;
 }
 
+.form {
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.form label {
+  margin: auto 30px;
+}
+
 .board {
   margin: auto 0;
 }
@@ -46,30 +57,26 @@
   /* width: 400px; */
   margin: 0 auto;
   justify-content: center;
+
 }
 
 .square {
-  width: 200px;
-  height: 300px;
+  /* width: 200px; */
 }
 
 .squareRow2 {
-  width: 100px;
-  height: 300px;
+  /* width: 100px; */
   padding-bottom: 20px;
 }
 
 .squareRow3 {
   /* z-index: 10; */
-  width: 100px;
-  height: 300px;
-  outline: 1px dashed rgb(58, 88, 187);
+  /* width: 100px; */
+  /* outline: 1px dashed rgb(58, 88, 187); */
   /* outline-offset: -2px; */
   box-sizing: border-box;
 }
-.squareRow3 .smooth-dnd-draggable-wrapper {
 
-}
 .onSquare {
   background-color: rgb(222, 170, 238, 0.5);
 }
@@ -86,7 +93,6 @@
   z-index: 10;
   font-size: 60px;
   text-align: center;
-  height: 300px;
   cursor: grab;
   /* transition: opacity .2s ease;  */
   background-color: none;
@@ -99,69 +105,76 @@
   cursor: grabbing;
   animation-name: blinker;
   animation-iteration-count: infinite;
-  animation-timing-function: cubic-bezier(1.0,0,0,1.0);
+  animation-timing-function: cubic-bezier(1.0, 0, 0, 1.0);
   animation-duration: 1s;
   -webkit-animation-name: blinker;
   -webkit-animation-iteration-count: infinite;
-  -webkit-animation-timing-function: cubic-bezier(1.0,0,0,1.0);
+  -webkit-animation-timing-function: cubic-bezier(1.0, 0, 0, 1.0);
   -webkit-animation-duration: 2s;
 }
-@-webkit-keyframes blinker {
-	0% {background-color: #ffffff;}
-	50% {background-color: rgba(124, 124, 124, 0.2)}
-	100% {background-color: #ffffff;}
-}
- 
-@keyframes blinker {
-	0% {background-color: #ffffff;}
-	50% {background-color: rgba(124, 124, 124, 0.2)}
-	100% {background-color: #ffffff;}
-} 
 
-.nothing {
-  /* z-index: 999; */
-  /* background: none; */
-  /* display: none; */
-  /* transform: scale(0); */
+@-webkit-keyframes blinker {
+  0% {
+    background-color: #ffffff;
+  }
+  50% {
+    background-color: rgba(124, 124, 124, 0.2)
+  }
+  100% {
+    background-color: #ffffff;
+  }
+}
+
+@keyframes blinker {
+  0% {
+    background-color: #ffffff;
+  }
+  50% {
+    background-color: rgba(124, 124, 124, 0.2)
+  }
+  100% {
+    background-color: #ffffff;
+  }
 }
 
 .top {
   position: absolute;
   /* z-index: 1; */
   /* background-color: blue; */
-  outline: 1px dashed rgb(58, 88, 187);
-  height: 100px;
+  /* outline: 1px dashed rgb(58, 88, 187); */
+  /* height: 100px; */
   box-shadow: 0 0 40px -10px;
   opacity: 0.4;
-  border: 1px dashed black;
+  /* border: 1px dashed black; */
   -webkit-transform: rotateX(-90deg);
   -webkit-transform-origin: top;
+  background: linear-gradient(to bottom, rgb(193, 193, 221), rgb(70, 70, 88));
 }
 
 .bottom {
-  top: 300px;
+  /* top: 300px; */
   position: absolute;
   /* z-index: 1; */
   background-color: blue;
-  height: 100px;
+  /* height: 100px; */
   box-shadow: 0 0 40px -10px;
   opacity: 0.4;
   border: 1px dashed black;
   -webkit-transform: rotateX(-90deg);
   -webkit-transform-origin: top;
 }
-.bottom-hover{
-  background-color: rgb(94, 190, 245);
 
+.bottom-hover {
+  background-color: rgb(94, 190, 245);
 }
 
 .left {
   /* z-index: 1; */
   position: absolute;
   background-color: rgb(110, 110, 136);
-  height: 300px;
-  width: 100px;
-  box-shadow: inset 0 0 40px -10px rgb(88, 124, 192);
+  /* height: 300px; */
+  /* width: 100px; */
+  background: linear-gradient(to right, rgb(193, 193, 221), rgb(70, 70, 88));
   opacity: 0.5;
   -webkit-transform: rotateY(90deg);
   -webkit-transform-origin: left;
@@ -172,33 +185,27 @@
   background-color: rgb(110, 110, 136);
   position: absolute;
   right: 0px;
-  height: 300px;
-  width: 100px;
-  box-shadow: inset 0 0 40px -10px rgb(88, 124, 192);
+  /* height: 300px; */
+  /* width: 100px; */
+  background: linear-gradient(to left, rgb(193, 193, 221), rgb(70, 70, 88));
   opacity: 0.5;
   -webkit-transform: translateX(0) rotateY(-90deg);
   -webkit-transform-origin: right;
 }
 
-.resting {
-  background-color: black;
-  width: 50px;
-  height: 50px;
-}
-
 .underCube {
   /* z-index: 1; */
   position: absolute;
-  left: 0;
+  /* left: 70; */
   height: 100%;
 }
 
 .cube {
   /* z-index: 1; */
   height: 100%;
-  perspective: 400px;
+  perspective: 300px;
   position: relative;
-  border-bottom: 14px solid rgb(112, 112, 112);
+  border-bottom: 14px solid rgb(110, 110, 136);
 }
 
 .smooth-dnd-ghost {
@@ -206,7 +213,27 @@
 }
 
 .dropping {
-/* padding-left: 100px; */
-position: absolute;
-  /* left: 50; */
+  position: absolute;
+}
+
+.gridWrapper {
+  position: absolute;
+  margin: auto 0;
+  perspective: 300px;
+  /* position: relative; */
+}
+
+.grid {
+  position: absolute;
+  transform: rotateX(-99deg);
+  transform-style: preserve-3d;
+}
+
+.grid div {
+  /* height: 200px; width: 225px; */
+  float: left;
+  transform-style: preserve-3d;
+  border-left: 1px dashed blue;
+  border-right: 1px dashed blue;
+  box-sizing: border-box;
 }
