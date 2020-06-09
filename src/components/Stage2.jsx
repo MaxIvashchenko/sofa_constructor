@@ -133,9 +133,7 @@ class Stage2 extends Component {
 
 		return (
 			<Draggable>
-				<div className={makeClass()} style={{ height: this.pieceHight }}>
-					{/* <span>{piece.data}</span> */}
-				</div>
+				<div className={makeClass()} style={{ height: this.pieceHight }}></div>
 			</Draggable>
 		);
 
@@ -147,7 +145,7 @@ class Stage2 extends Component {
 		// console.log(this.state.colonka)
 		// console.log('sofa', this.state.board[2])
 		return (
-			<  >
+			<>
 
 				{this.state.board.map((row, rowIndex) => {
 					if (rowIndex === 2) {
@@ -168,23 +166,43 @@ class Stage2 extends Component {
 										<div className={this.dragging ? 'bottom bottom-hover' : 'bottom'}
 											style={{ width: this.withing, top: this.pieceHight, height: this.pieceWidth }}></div>
 									</div>
-									<div class="gridWrapper" style={{ top: this.pieceHight -100, width: this.withing }}>
-										<div class="grid">
-											{row.map((v, i) => {
-												return <div style={{ width: this.pieceWidth * v.size, height: 200 }} className=''></div>
-											})}
-										</div>
+
+
+
+								</div>
+								<div className="gridWrapper" style={{ width: this.withing, height: this.pieceHight }}>
+									<div className="grid" style={{ width: this.withing }} >
+										{row.map((v, i) => {
+											return (
+												<div style={{ width: this.pieceWidth * v.size, height: this.pieceHight }} >
+													<div className={!v.empty && 'sectionFront'} style={{ width: this.pieceWidth * v.size, height: this.pieceHight }} ></div>
+													<div className={!v.empty && 'sectionLeft'} style={{ width: this.pieceWidth, height: this.pieceHight }} ></div>
+													<div className={!v.empty && 'sectionRight'} style={{ width: this.pieceWidth, height: this.pieceHight }} ></div>
+												</div>
+											)
+										})}
+									</div>
+								</div>
+								<div className="gridWrapper" style={{ width: this.withing, height: this.pieceHight, perspective: 200 }}>
+									<div className="grid" style={{ width: this.withing }} >
+										{row.map((v, i) => {
+											return (
+												<div style={{ width: this.pieceWidth * v.size, height: this.pieceHight }} >
+													<div className='Rio' style={{ width: this.pieceWidth, height: this.pieceHight - 200 }} ></div>
+
+												</div>
+											)
+										})}
 									</div>
 								</div>
 
 
-
 								{row.map((piece, colIndex) => {
 									return (
-										<div
+										<div className='squareRow3 ' style={{ width: this.pieceWidth * piece.size }} key={`${rowIndex}${colIndex}`}>
 
-											className='squareRow3 ' style={{ width: this.pieceWidth * piece.size }} key={`${rowIndex}${colIndex}`}>
 											<Container
+
 												dragClass="nothing"
 												dropClass="dropping"
 												style={{ height: '100%' }}
@@ -193,16 +211,10 @@ class Stage2 extends Component {
 												getChildPayload={() => ({ colIndex, rowIndex, piece })}
 
 												onDragStart={(result) => this.onDragStart(result, rowIndex, colIndex)}
+												// onDragLeave={(result) => this.onDragLeave(result, rowIndex, colIndex)}
 
-												// dropPlaceholder={{
-												// 	animationDuration: 150,
-												// 	showOnTop: true,
-												// 	className: 'cards-drop-preview'
-												// }}
-												// animationDuration={1000}
-												// onDragLeave={() => this.onDragLeave(rowIndex, colIndex)}
 												onDragEnd={() => this.onDragEnd(rowIndex, colIndex)}
-												onDragEnter={() => this.onDragEnter(rowIndex, colIndex)}
+												onDragEnter={(result) => this.onDragEnter(result, rowIndex, colIndex)}
 												onDropReady={(result) => this.onDropReady(result)}
 												shouldAcceptDrop={(_, payload) => this.shouldAcceptDrop(payload, rowIndex, colIndex)}
 											>
@@ -274,13 +286,6 @@ class Stage2 extends Component {
 						</>
 					);
 				})}
-				{/* <div className="gridWrapper" style={{ top: this.pieceHight + 20, width: this.withing }}>
-					<div className="grid">
-						{row.map((v, i) => {
-							return <div style={{ width: this.pieceWidth }} className=''>{i}</div>
-						})}
-					</div>
-				</div> */}
 
 			</>
 		);
@@ -309,7 +314,9 @@ class Stage2 extends Component {
 		}
 	}
 
-	onDragEnter(rowIndex, colIndex) {
+
+	onDragEnter(result, rowIndex, colIndex) {
+
 		this.setState({ colonka: colIndex });
 		this.dragging = true
 	}
@@ -329,7 +336,7 @@ class Stage2 extends Component {
 		if (fromPiece === piece) return true;
 		if (fromPiece.side === piece.side) return false;
 		if ((fromPiece.side === 'white') && (piece.side === 'black')) return false;
-		// if ((fromPiece.side === 'white') && (piece.side === 'white')) return true;
+		if ((fromPiece.side === 'white') && (piece.side === 'white')) return false;
 		// if (fromPiece.side === 'white') return true;
 
 		return true;
@@ -346,7 +353,9 @@ class Stage2 extends Component {
 		const { addedIndex, removedIndex, payload } = dropResult;
 		const sofa = this.state.board[2]
 		const newEmptySection = { side: "white", size: 1, model: 'empty', empty: true }
-
+		if (dropResult.payload.piece.side === 'white') {
+	return null
+		}
 
 		if (addedIndex !== null || removedIndex !== null) {
 			const copyItem = Object.assign({}, payload.piece);
@@ -363,78 +372,72 @@ class Stage2 extends Component {
 
 		console.log('drop')
 
-		if (addedIndex === null && removedIndex === 0 && rowIndex === 2) {
-			console.log('hiiiii')
-			// this.forceUpdate()
-		} // удаляем вынося за шкаф
-		// console.log('sofa', sofa)
-
 		if (addedIndex !== null && removedIndex === null) {
-			if (dropResult.payload.piece.side === 'white') {
+			// if (dropResult.payload.piece.side === 'white') {
 
-				console.log('drop', sofa)
+			// 	console.log('drop', sofa)
 
-				const arrNew = this.prevSofa.map((sof, i) => {
-					// if (payload.piece.id !== this.state.board[2][payload.colIndex].id){
-
-
-					if (i === this.state.colonka) {
-						console.log('-----*start*-----')
-						console.log('this.prevSofa', this.prevSofa)
-
-						console.log('i === this.state.colonka', i === this.state.colonka, 'this.state.colonka =', this.state.colonka)
-						console.log(payload.piece)
-						console.log('-----*end*-----')
-
-						return sof = payload.piece
-					}
-
-					else if (i === payload.colIndex) {
-						console.log('uno-----')
-						console.log('this.prevSofa', this.prevSofa)
-
-						console.log('i === payload.colIndex -->', i === payload.colIndex, 'payload.colIndex =', payload.colIndex)
-						console.log(this.prevSofa[this.state.colonka])
-
-						return sof = this.prevSofa[this.state.colonka]
-					} else {
-						return sof
-
-					}
-					//  }
-				})
-
-				console.log('arrNew', arrNew)
-				arrNew.splice(payload.colIndex, 1, {});
-				console.log('arrNew', arrNew)
-
-				// [arr[payload.colIndex], arr[this.state.colonka]] = [arr[this.state.colonka], arr[payload.colIndex]];
-				// const result = [...arr];
-
-				// console.log(payload.colIndex) 
-				// console.log(this.state.colonka)
-				// console.log(arr)
-				// let itemToAdd = payload;
-
-				// if (removedIndex !== null) {
-				// 	console.log('ee')
-				// 	itemToAdd = result.splice(removedIndex, 1)[0];
-				// }
-
-				// if (addedIndex !== null) {
-				// 	result.splice(addedIndex, 0, itemToAdd);
-				// }
+			// 	const arrNew = this.prevSofa.map((sof, i) => {
+			// 		// if (payload.piece.id !== this.state.board[2][payload.colIndex].id){
 
 
-				return this.setState(prevState => ({
-					board: prevState.board.map(
-						(item, i) => (i === 2 ? arrNew : item)
-					)
-				}));
+			// 		if (i === this.state.colonka) {
+			// 			console.log('-----*start*-----')
+			// 			console.log('this.prevSofa', this.prevSofa)
 
-			}
+			// 			console.log('i === this.state.colonka', i === this.state.colonka, 'this.state.colonka =', this.state.colonka)
+			// 			console.log(payload.piece)
+			// 			console.log('-----*end*-----')
 
-			if (payload.piece.size === 2 && this.prevSofa[colIndex].size === 1 && colIndex < this.prevSofa.length - 1) {
+			// 			return sof = payload.piece
+			// 		}
+
+			// 		else if (i === payload.colIndex) {
+			// 			console.log('uno-----')
+			// 			console.log('this.prevSofa', this.prevSofa)
+
+			// 			console.log('i === payload.colIndex -->', i === payload.colIndex, 'payload.colIndex =', payload.colIndex)
+			// 			console.log(this.prevSofa[this.state.colonka])
+
+			// 			return sof = this.prevSofa[this.state.colonka]
+			// 		} else {
+			// 			return sof
+
+			// 		}
+			// 		//  }
+			// 	})
+
+			// 	console.log('arrNew', arrNew)
+			// 	arrNew.splice(payload.colIndex, 1, {});
+			// 	console.log('arrNew', arrNew)
+
+			// 	// [arr[payload.colIndex], arr[this.state.colonka]] = [arr[this.state.colonka], arr[payload.colIndex]];
+			// 	// const result = [...arr];
+
+			// 	// console.log(payload.colIndex) 
+			// 	// console.log(this.state.colonka)
+			// 	// console.log(arr)
+			// 	// let itemToAdd = payload;
+
+			// 	// if (removedIndex !== null) {
+			// 	// 	console.log('ee')
+			// 	// 	itemToAdd = result.splice(removedIndex, 1)[0];
+			// 	// }
+
+			// 	// if (addedIndex !== null) {
+			// 	// 	result.splice(addedIndex, 0, itemToAdd);
+			// 	// }
+
+
+			// 	return this.setState(prevState => ({
+			// 		board: prevState.board.map(
+			// 			(item, i) => (i === 2 ? arrNew : item)
+			// 		)
+			// 	}));
+
+			// }
+
+			if (payload.piece.size === 2 && this.prevSofa[colIndex].size === 1 && colIndex < this.prevSofa.length - 1 && dropResult.payload.piece.side !== 'white') {
 				sofa.splice(colIndex + 1, 1);
 				console.log('two')
 			}
