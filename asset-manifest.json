@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/sofa_constructor/static/css/main.ef178753.chunk.css",
-    "main.js": "/sofa_constructor/static/js/main.aedc6c01.chunk.js",
-    "main.js.map": "/sofa_constructor/static/js/main.aedc6c01.chunk.js.map",
+    "main.js": "/sofa_constructor/static/js/main.745c25a3.chunk.js",
+    "main.js.map": "/sofa_constructor/static/js/main.745c25a3.chunk.js.map",
     "runtime-main.js": "/sofa_constructor/static/js/runtime-main.c30abd2b.js",
     "runtime-main.js.map": "/sofa_constructor/static/js/runtime-main.c30abd2b.js.map",
     "static/js/2.32635b08.chunk.js": "/sofa_constructor/static/js/2.32635b08.chunk.js",
     "static/js/2.32635b08.chunk.js.map": "/sofa_constructor/static/js/2.32635b08.chunk.js.map",
     "index.html": "/sofa_constructor/index.html",
-    "precache-manifest.b02a9463b244e60911538406142ea940.js": "/sofa_constructor/precache-manifest.b02a9463b244e60911538406142ea940.js",
+    "precache-manifest.f26582215f529b82868ddd65c3771060.js": "/sofa_constructor/precache-manifest.f26582215f529b82868ddd65c3771060.js",
     "service-worker.js": "/sofa_constructor/service-worker.js",
     "static/css/main.ef178753.chunk.css.map": "/sofa_constructor/static/css/main.ef178753.chunk.css.map",
     "static/js/2.32635b08.chunk.js.LICENSE.txt": "/sofa_constructor/static/js/2.32635b08.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.c30abd2b.js",
     "static/js/2.32635b08.chunk.js",
     "static/css/main.ef178753.chunk.css",
-    "static/js/main.aedc6c01.chunk.js"
+    "static/js/main.745c25a3.chunk.js"
   ]
 }
