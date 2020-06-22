@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a14837dedfdb241ec3769264e6873438",
+    "revision": "0a8467b69ca079c931450ac32028e4d3",
     "url": "/sofa_constructor/index.html"
   },
   {
-    "revision": "d96f3b228b20af1d7864",
-    "url": "/sofa_constructor/static/css/main.ef178753.chunk.css"
+    "revision": "fb488d82309965631c2f",
+    "url": "/sofa_constructor/static/css/main.7247d4a3.chunk.css"
   },
   {
-    "revision": "b8e6417a7a9ef76879ea",
-    "url": "/sofa_constructor/static/js/2.32635b08.chunk.js"
+    "revision": "d8d90fcc25aca78683d4",
+    "url": "/sofa_constructor/static/js/2.4b0181da.chunk.js"
   },
   {
     "revision": "e88a3e95b5364d46e95b35ae8c0dc27d",
-    "url": "/sofa_constructor/static/js/2.32635b08.chunk.js.LICENSE.txt"
+    "url": "/sofa_constructor/static/js/2.4b0181da.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "d96f3b228b20af1d7864",
-    "url": "/sofa_constructor/static/js/main.745c25a3.chunk.js"
+    "revision": "fb488d82309965631c2f",
+    "url": "/sofa_constructor/static/js/main.f6cceb6b.chunk.js"
   },
   {
     "revision": "2089741e07bc450b5e3b",
