@@ -1,0 +1,14 @@
+.form {
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.form label {
+    margin: auto 30px;
+}
+
+.form input {
+    width: 80px;
+}

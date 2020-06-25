@@ -1,0 +1,171 @@
+/* виды шкафов */
+
+.model-1 {
+    background: white url('../../images/0.png');
+    background-size: 100% 100%;
+}
+
+.model-2 {
+    background: white url('../../images/1.png');
+    background-size: 100% 100%;
+}
+
+.model-3 {
+    background: white url('../../images/2.png');
+    background-size: 100% 100%;
+}
+
+.model-4 {
+    background: white url('../../images/3.png');
+    background-size: 100% 100%;
+}
+
+/* кнопки выбора модулей */
+
+.chooseModule {
+    display: flex;
+    margin: 20px 0 20px 20%;
+}
+
+.chooseModule div {
+    float: left;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.moduleBtnAtcive {
+    border-bottom: 3px solid red;
+}
+
+/* информация о цене и тд */
+
+.infoTab {
+    display: flex;
+    background-color: #fd4f7d;
+    justify-content: center;
+}
+
+.infoTab div {
+    padding: 20px;
+    font-size: 20px;
+    color: #f3f3f3;
+}
+
+/* ховеры шкафа */
+
+.onSquare {
+    background-color: rgb(222, 170, 238, 0.5);
+}
+
+.onSquareHalfRight {
+    background: linear-gradient(to right, rgb(222, 170, 238, 0.5) 50%, rgb(58, 88, 187, 0) 50%);
+}
+
+.onSquareHalfLeft {
+    background: linear-gradient(to right, rgb(58, 88, 187, 0) 50%, rgb(222, 170, 238, 0.5) 50%);
+}
+
+.piece {
+    z-index: 10;
+    cursor: grab;
+    background-color: none;
+}
+
+.dragging {
+    cursor: grabbing;
+    animation-name: blinker;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(1.0, 0, 0, 1.0);
+    animation-duration: 1s;
+    -webkit-animation-name: blinker;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: cubic-bezier(1.0, 0, 0, 1.0);
+    -webkit-animation-duration: 2s;
+}
+
+@-webkit-keyframes blinker {
+    0% {
+        background-color: #ffffff;
+    }
+    50% {
+        background-color: rgba(124, 124, 124, 0.2)
+    }
+    100% {
+        background-color: #ffffff;
+    }
+}
+
+@keyframes blinker {
+    0% {
+        background-color: #ffffff;
+    }
+    50% {
+        background-color: rgba(124, 124, 124, 0.2)
+    }
+    100% {
+        background-color: #ffffff;
+    }
+}
+
+/* отрисовка шкафа */
+
+.cube {
+    height: 100%;
+    perspective: 800px;
+    position: relative;
+}
+
+.underCube {
+    position: absolute;
+    height: 100%;
+}
+
+.back {
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    opacity: 1;
+    z-index: 3;
+    -webkit-transform: translateZ(-100px);
+    -webkit-transform-origin: top;
+}
+
+.top {
+    position: absolute;
+    box-shadow: 0 0 40px -10px;
+    opacity: 0.4;
+    -webkit-transform: rotateX(-90deg);
+    -webkit-transform-origin: top;
+    background: linear-gradient(to bottom, rgb(193, 193, 221), rgb(70, 70, 88));
+}
+
+.bottom {
+    position: absolute;
+    background-color: blue;
+    box-shadow: 0 0 40px -10px;
+    opacity: 0.4;
+    -webkit-transform: rotateX(-90deg);
+    -webkit-transform-origin: top;
+}
+
+.bottom-hover {
+    background-color: rgb(94, 190, 245);
+}
+
+.left {
+    position: absolute;
+    background-color: rgb(110, 110, 136);
+    background: linear-gradient(to right, rgb(193, 193, 221), rgb(70, 70, 88));
+    opacity: 0.5;
+    -webkit-transform: rotateY(90deg);
+    -webkit-transform-origin: left;
+}
+
+.right {
+    background-color: rgb(110, 110, 136);
+    position: absolute;
+    right: 0px;
+    background: linear-gradient(to left, rgb(193, 193, 221), rgb(70, 70, 88));
+    opacity: 0.5;
+    -webkit-transform: rotateY(-90deg);
+    -webkit-transform-origin: right;
+}

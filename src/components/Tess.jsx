@@ -52,7 +52,7 @@ class LockAxis extends Component {
 		return (
 			<div>
 				<div className="simple-page">
-					<Container lockAxis="y"
+					<Container 
 						onDrop={e => this.onDrop(e)}
 					>
 						{this.state.items[1].map(p => {
