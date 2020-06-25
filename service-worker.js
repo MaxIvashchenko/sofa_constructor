@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/sofa_constructor/precache-manifest.432103082c5df19a7391d84ef893885b.js"
+  "/sofa_constructor/precache-manifest.b72bede7851f17a4e801ddcdec1e7726.js"
 );
 
 self.addEventListener('message', (event) => {

@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/sofa_constructor/static/css/main.06f3bc11.chunk.css",
-    "main.js": "/sofa_constructor/static/js/main.4aff58ab.chunk.js",
-    "main.js.map": "/sofa_constructor/static/js/main.4aff58ab.chunk.js.map",
+    "main.css": "/sofa_constructor/static/css/main.24d21a50.chunk.css",
+    "main.js": "/sofa_constructor/static/js/main.077f12ad.chunk.js",
+    "main.js.map": "/sofa_constructor/static/js/main.077f12ad.chunk.js.map",
     "runtime-main.js": "/sofa_constructor/static/js/runtime-main.c30abd2b.js",
     "runtime-main.js.map": "/sofa_constructor/static/js/runtime-main.c30abd2b.js.map",
     "static/js/2.95a32a0d.chunk.js": "/sofa_constructor/static/js/2.95a32a0d.chunk.js",
     "static/js/2.95a32a0d.chunk.js.map": "/sofa_constructor/static/js/2.95a32a0d.chunk.js.map",
     "index.html": "/sofa_constructor/index.html",
-    "precache-manifest.432103082c5df19a7391d84ef893885b.js": "/sofa_constructor/precache-manifest.432103082c5df19a7391d84ef893885b.js",
+    "precache-manifest.b72bede7851f17a4e801ddcdec1e7726.js": "/sofa_constructor/precache-manifest.b72bede7851f17a4e801ddcdec1e7726.js",
     "service-worker.js": "/sofa_constructor/service-worker.js",
-    "static/css/main.06f3bc11.chunk.css.map": "/sofa_constructor/static/css/main.06f3bc11.chunk.css.map",
+    "static/css/main.24d21a50.chunk.css.map": "/sofa_constructor/static/css/main.24d21a50.chunk.css.map",
     "static/js/2.95a32a0d.chunk.js.LICENSE.txt": "/sofa_constructor/static/js/2.95a32a0d.chunk.js.LICENSE.txt",
-    "static/media/App.css": "/sofa_constructor/static/media/3.91991c6e.png"
+    "static/media/Stage2.css": "/sofa_constructor/static/media/3.91991c6e.png"
   },
   "entrypoints": [
     "static/js/runtime-main.c30abd2b.js",
     "static/js/2.95a32a0d.chunk.js",
-    "static/css/main.06f3bc11.chunk.css",
-    "static/js/main.4aff58ab.chunk.js"
+    "static/css/main.24d21a50.chunk.css",
+    "static/js/main.077f12ad.chunk.js"
   ]
 }
