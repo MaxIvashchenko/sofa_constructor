@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Container, Draggable } from 'react-smooth-dnd';
 import "./Stage2.css"
 import ModuleTabChange from './ModuleTabChange';
+import InfoTab from './InfoTab';
 
 class Stage2 extends Component {
 	constructor(props) {
@@ -10,7 +11,6 @@ class Stage2 extends Component {
 		this.onDrop = this.onDrop.bind(this);
 		this.shouldAcceptDrop = this.shouldAcceptDrop.bind(this);
 		this.renderPiece = this.renderPiece.bind(this);
-		this.sofaLength = this.sofaLength.bind(this);
 		this.handleMouseMove = this.handleMouseMove.bind(this);
 		this.handler = this.handler.bind(this);
 		this.onDragStart = this.onDragStart.bind(this);
@@ -21,15 +21,9 @@ class Stage2 extends Component {
 		this.pieceHeight = this.props.sofaHeight;
 		this.withing = this.props.sofaWidth;
 		this.pieceDeep = this.props.sofaDeep;
-		this.totalPrice = null;
+		this.zoom = this.props.zoom;
 
-		
-		// this.pieceHeight = 170;
-		// this.pieceWidth = 100;
-		// this.pieceDeep = 40;
-		// this.newCapacity = 5;
-		// this.totalPrice = null;
-		// this.withing = this.newCapacity * this.pieceWidth;
+		this.totalPrice = null;
 
 		this.prevSofa = [];
 		this.activeSectionSize = null;
@@ -44,27 +38,14 @@ class Stage2 extends Component {
 					{ side: "black", size: 2, id: 'black-0-1', model: 'model-2', empty: false, price: 210 },
 					{ side: "black", size: 2, id: 'black-0-2', model: 'model-3', empty: false, price: 220 },
 					{ side: "black", size: 2, id: 'black-0-3', model: 'model-4', empty: false, price: 230 },
-					{ side: "black", size: 2, id: 'black-0-0', model: 'model-1', empty: false, price: 200 },
-					{ side: "black", size: 2, id: 'black-0-1', model: 'model-2', empty: false, price: 210 },
-					{ side: "black", size: 2, id: 'black-0-2', model: 'model-3', empty: false, price: 220 },
-					{ side: "black", size: 2, id: 'black-0-3', model: 'model-4', empty: false, price: 230 },
 				],
 				[
 					{ side: "black", size: 1, id: 'black-1-0', model: 'model-1', empty: false, price: 100 },
 					{ side: "black", size: 1, id: 'black-1-1', model: 'model-2', empty: false, price: 110 },
 					{ side: "black", size: 1, id: 'black-1-2', model: 'model-3', empty: false, price: 120 },
 					{ side: "black", size: 1, id: 'black-1-3', model: 'model-4', empty: false, price: 130 },
-					{ side: "black", size: 1, id: 'black-1-3', model: 'model-4', empty: false, price: 130 },
-					{ side: "black", size: 1, id: 'black-1-3', model: 'model-4', empty: false, price: 130 },
-					{ side: "black", size: 1, id: 'black-1-3', model: 'model-4', empty: false, price: 130 },
-					{ side: "black", size: 1, id: 'black-1-3', model: 'model-4', empty: false, price: 130 },
-					{ side: "black", size: 1, id: 'black-1-3', model: 'model-4', empty: false, price: 130 },
-					{ side: "black", size: 1, id: 'black-1-3', model: 'model-4', empty: false, price: 130 },
-					{ side: "black", size: 1, id: 'black-1-3', model: 'model-4', empty: false, price: 130 },
-					{ side: "black", size: 1, id: 'black-1-3', model: 'model-4', empty: false, price: 130 },
-					{ side: "black", size: 1, id: 'black-1-3', model: 'model-4', empty: false, price: 130 },
 				],
-				this.sofaLength(this.newCapacity)
+				this.props.sofa
 			],
 			x: 0,
 			colonka: null,
@@ -72,13 +53,7 @@ class Stage2 extends Component {
 		}
 	}
 
-	sofaLength(n) {
-		const arr = [];
-		for (var i = 0; i < n; i++) {
-			arr.push({ side: "white", size: 1, id: `white-2-${i}`, model: 'empty', empty: true, price: 0})
-		}
-		return arr
-	}
+	
 	renderPiece(piece, rowIndex, colIndex, colonka) {
 		const makeClass = () => {
 			if (rowIndex === 2 && this.dragging) {
@@ -102,12 +77,15 @@ class Stage2 extends Component {
 						return `piece ${piece.model}`
 					}
 				}
-				if (colonka !== null && this.activeSectionSize === 2 && this.state.board[2][colonka].size === 2 && this.state.x > 100 && this.state.board[2][colonka] && colonka !== this.state.board[2].length - 1) {
+				if (colonka !== null && this.activeSectionSize === 2 && this.state.board[2][colonka].size === 2 && this.state.x > this.pieceWidth && this.state.board[2][colonka] && colonka !== this.state.board[2].length - 1) {
 
 					if (this.state.board[2][colonka + 1] && this.state.board[2][colonka + 1].size === 2) {
 						if (colonka + 1 === colIndex) {
+
+
 							return `piece ${piece.model} onSquareHalfRight`
 						} else if ((colonka === colIndex)) {
+
 							return `piece ${piece.model} onSquareHalfLeft`
 						} else { return `piece ${piece.model}` }
 					} else {
@@ -158,87 +136,96 @@ class Stage2 extends Component {
 
 	render() {
 		// console.log('mouse_-------->', this.state.x)
-// console.log(this.props)
+		// console.log(this.props)
 		return (
 			<>
-			<ModuleTabChange onclick={this.changeModule} showDoubleModule={this.state.showDoubleModules} />
-				
+				<ModuleTabChange onclick={this.changeModule} showDoubleModule={this.state.showDoubleModules} />
+
 				{this.state.board.map((row, rowIndex) => {
 					if (rowIndex === 2) {
 						return (
-							<div
-								onMouseLeave={this.handler}
-								onMouseMove={this.handleMouseMove}
-								className="row3"
-								style={{ width: this.withing }}
-								key={row + "-" + rowIndex}>
+							<>
+								<InfoTab
+									width={this.withing/this.zoom}
+									height={this.pieceHeight/this.zoom}
+									deep={this.pieceDeep/this.zoom}
+									capacity={this.newCapacity}
+									sofa={this.state.board[2]}
+								/>
+								<div
+									onMouseLeave={this.handler}
+									onMouseMove={this.handleMouseMove}
+									className="sofaBox"
+									style={{ width: this.withing }}
+									key={row + "-" + rowIndex}>
 
-								<div className="gridWrapper" style={{ width: this.withing, height: this.pieceHeight, perspective: 400 , borderBottom: "14px solid rgb(110, 110, 136)"}}>
-									<div className="grid" style={{ width: this.withing }} >
-										{row.map((v, i) => {
-											return (
-												<div style={{ width: this.pieceWidth * v.size, height: this.pieceHeight }} >
-													<div className='dashUnderline' style={{ width: this.pieceWidth, height: this.pieceHeight , top: this.pieceHeight / 2 }} ></div>
-													<div className={!v.empty && 'solidUnderline'} style={{ width: this.pieceWidth * v.size, height: this.pieceHeight, top: this.pieceHeight / 2   }} ></div>
-												</div>
-											)
-										})}
+									<div className="underSofa" style={{ width: this.withing, height: this.pieceHeight, perspective: 300, overflow: "hidden", padding: 40, top:-40 }}>
+										<div className="underSofaSides" style={{ width: this.withing }} >
+											{row.map((v, i) => {
+												return (
+													<div style={{ width: this.pieceWidth * v.size, height: this.pieceHeight }} >
+														<div className='dashUnderline' style={{ width: this.pieceWidth, height: this.pieceHeight, top: this.pieceHeight / 2 }} ></div>
+														<div className={!v.empty && 'solidUnderline'} style={{ width: this.pieceWidth * v.size, height: this.pieceHeight, top: this.pieceHeight / 2 }} ></div>
+													</div>
+												)
+											})}
+										</div>
 									</div>
-								</div>
-								<div className="underCube">
-									<div className='cube' style={{ width: this.withing }}>
-										<div className="back" style={{ height: this.pieceHeight, width: this.withing }}></div>
-										<div className="left" style={{ height: this.pieceHeight, width: this.pieceWidth }}></div>
-										<div className="right" style={{ height: this.pieceHeight, width: this.pieceWidth }}></div>
-										<div className="top" style={{ width: this.withing, height: this.pieceWidth }}></div>
-										<div className={this.dragging ? 'bottom bottom-hover' : 'bottom'}
-											style={{ width: this.withing, top: this.pieceHeight, height: this.pieceWidth }}></div>
+									<div className="sofaConstructor">
+										<div className='sofaSides' style={{ width: this.withing }}>
+											<div className="back" style={{ height: this.pieceHeight, width: this.withing }}></div>
+											<div className="left" style={{ height: this.pieceHeight, width: this.pieceWidth }}></div>
+											<div className="right" style={{ height: this.pieceHeight, width: this.pieceWidth }}></div>
+											<div className="top" style={{ width: this.withing, height: this.pieceWidth }}></div>
+											<div className={this.dragging ? 'bottom bottom-hover' : 'bottom'}
+												style={{ width: this.withing, top: this.pieceHeight, height: this.pieceWidth }}></div>
+										</div>
 									</div>
-								</div>
-								<div className="gridWrapper" style={{ width: this.withing, height: this.pieceHeight,  }}>
-									<div className="grid" style={{ width: this.withing }} >
-										{row.map((v, i) => {
-											if (v.empty) {
+									<div className="underSofa" style={{ width: this.withing, height: this.pieceHeight}}>
+										<div className="underSofaSides" style={{ width: this.withing }} >
+											{row.map((v, i) => {
+												if (v.empty) {
+													return (
+														<div style={{ width: this.pieceWidth * v.size, height: this.pieceHeight }} >
+															<div className={!v.empty && 'sectionFront'} style={{ width: this.pieceWidth * v.size, height: this.pieceHeight }} ></div>
+
+														</div>
+													)
+												}
 												return (
 													<div style={{ width: this.pieceWidth * v.size, height: this.pieceHeight }} >
 														<div className={!v.empty && 'sectionFront'} style={{ width: this.pieceWidth * v.size, height: this.pieceHeight }} ></div>
-
+														<div className={!v.empty && 'sectionLeft'} style={{ width: this.pieceWidth, height: this.pieceHeight }} ></div>
+														<div className={!v.empty && 'sectionRight'} style={{ width: this.pieceWidth, height: this.pieceHeight }} ></div>
 													</div>
 												)
-											}
-											return (
-												<div style={{ width: this.pieceWidth * v.size, height: this.pieceHeight }} >
-													<div className={!v.empty && 'sectionFront'} style={{ width: this.pieceWidth * v.size, height: this.pieceHeight }} ></div>
-													<div className={!v.empty && 'sectionLeft'} style={{ width: this.pieceWidth, height: this.pieceHeight }} ></div>
-													<div className={!v.empty && 'sectionRight'} style={{ width: this.pieceWidth, height: this.pieceHeight }} ></div>
-												</div>
-											)
-										})}
-									</div>
-								</div>
-
-								{row.map((piece, colIndex) => {
-									return (
-										<div  style={{ width: this.pieceWidth * piece.size }} key={`${rowIndex}${colIndex}`}>
-											<Container
-												dragClass="nothing"
-												style={{ height: '100%' }}
-												behaviour="drop-zone"
-												onDrop={(result) => this.onDrop(result, rowIndex, colIndex)}
-												getChildPayload={() => ({ colIndex, rowIndex, piece })}
-												onDragStart={(result) => this.onDragStart(result, rowIndex, colIndex)}
-												onDragEnd={() => this.onDragEnd(rowIndex, colIndex)}
-												onDragEnter={(result) => this.onDragEnter(result, rowIndex, colIndex)}
-												onDropReady={(result) => this.onDropReady(result)}
-												shouldAcceptDrop={(_, payload) => this.shouldAcceptDrop(payload, rowIndex, colIndex)}
-											>
-												{this.renderPiece(piece, rowIndex, colIndex, this.state.colonka)}
-											</Container>
+											})}
 										</div>
-									);
-								})}
+									</div>
 
-							</div>
+									{row.map((piece, colIndex) => {
+										return (
+											<div style={{ width: this.pieceWidth * piece.size }} key={`${rowIndex}${colIndex}`}>
+												<Container
+													dragClass="nothing"
+													style={{ height: '100%' }}
+													behaviour="drop-zone"
+													onDrop={(result) => this.onDrop(result, rowIndex, colIndex)}
+													getChildPayload={() => ({ colIndex, rowIndex, piece })}
+													onDragStart={(result) => this.onDragStart(result, rowIndex, colIndex)}
+													onDragEnd={() => this.onDragEnd(rowIndex, colIndex)}
+													onDragEnter={(result) => this.onDragEnter(result, rowIndex, colIndex)}
+													onDropReady={(result) => this.onDropReady(result)}
+													shouldAcceptDrop={(_, payload) => this.shouldAcceptDrop(payload, rowIndex, colIndex)}
+												>
+													{this.renderPiece(piece, rowIndex, colIndex, this.state.colonka)}
+												</Container>
+											</div>
+										);
+									})}
+
+								</div>
+							</>
 
 						);
 					}
@@ -246,10 +233,10 @@ class Stage2 extends Component {
 						return (
 							<>
 								{!this.state.showDoubleModules &&
-									<div className="row2" key={rowIndex}>
+									<div className="singleModuleBox" key={rowIndex}>
 										{row.map((piece, colIndex) => {
 											return (
-												<div className={`squareRow2 `}
+												<div className="moduleSection"
 													key={`${rowIndex}${colIndex}`}
 													style={{ width: this.pieceWidth * piece.size, height: this.pieceHeight }}
 												>
@@ -274,11 +261,11 @@ class Stage2 extends Component {
 
 					return (
 						<>
-							{this.state.showDoubleModules && <div className="row" key={rowIndex}>
+							{this.state.showDoubleModules && <div className="doubleModuleBox" key={rowIndex}>
 								{row.map((piece, colIndex) => {
 
 									return (
-										<div className={`square`}
+										<div className="moduleSection"
 											style={{ width: this.pieceWidth * piece.size, height: this.pieceHeight }}
 
 											key={`${rowIndex}${colIndex}`}>
@@ -299,13 +286,8 @@ class Stage2 extends Component {
 						</>
 					);
 				})}
-				<div className="infoTab">
-					<div>Width: {this.pieceWidth * this.newCapacity} см</div>
-					<div>Height: {this.pieceHeight} см</div>
-					<div>Deep: {this.pieceDeep} см</div>
-					<div>Number of doors: {this.newCapacity}</div>
-					<div>Total: {this.state.board[2].reduce((a,b)=> a+b.price, 0)} €</div>
-				</div>
+
+
 			</>
 		);
 	}
@@ -344,6 +326,7 @@ class Stage2 extends Component {
 	onDragEnd(rowIndex, colIndex) {
 		this.dragging = false
 		this.dragOverSofa = false
+		this.props.updateSofa(this.state.board[2])
 		this.forceUpdate()
 	}
 
@@ -370,6 +353,8 @@ class Stage2 extends Component {
 		const { addedIndex, removedIndex, payload } = dropResult;
 		const sofa = this.state.board[2]
 		const newEmptySection = { side: "white", size: 1, model: 'empty', empty: true, price: 0 }
+		this.props.updateSofa(this.state.board[2])
+
 		if (dropResult.payload.piece.side === 'white') {
 			return null
 		}
@@ -505,10 +490,8 @@ class Stage2 extends Component {
 				}
 
 			}
-			if(this.state.board[2].reduce((a,b)=> a+b.empty, 0) === 1) {
-				this.setState(state => ({
-					showDoubleModules: false
-				}));
+			if (this.state.board[2].reduce((a, b) => a + b.empty, 0) === 1) {
+				this.setState({ showDoubleModules: false })
 			}
 			this.setState(state => {
 				state.colonka = null

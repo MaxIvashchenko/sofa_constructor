@@ -5,7 +5,9 @@ import Tess from './components/Tess';
 import Stage2 from './components/Stage_2/Stage2';
 
 import Lines from './components/Lines';
-import Stage1 from './components/Stage_1/Stage1';
+import MyApp from './components/Stage_1/MyApp';
+import Stage3 from './components/Stage_3/Stage3';
+
 // import Mybox from './components/Mybox';
 
 
@@ -13,8 +15,8 @@ import Stage1 from './components/Stage_1/Stage1';
 function App() {
   return (
     <>
-
-      <Stage1 />
+<MyApp />
+{/* <Stage3 /> */}
       {/* <Tess /> */}
       {/* <Stage2 /> */}
       {/* <Lines /> */}

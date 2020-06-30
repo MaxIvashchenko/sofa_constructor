@@ -1,3 +1,13 @@
+.room {
+    background: white url('../../images/room.jpg') no-repeat;
+    background-size: 100% 80%;
+    margin: 20px auto;
+    position: relative;
+    width: 550px;
+    height: 450px;
+    border-radius: 4px;
+}
+
 .form {
     text-align: center;
     margin: 0 auto;
@@ -7,8 +17,25 @@
 
 .form label {
     margin: auto 30px;
+    position: absolute;
 }
 
 .form input {
     width: 80px;
+}
+
+.btnIn {
+    border-radius: 4px;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    padding: 8px 16px;
+
+    background-color: "#fd4f7d";
+    width: 120;
+}
+.btnPos{
+    display: flex;
+     margin: 0 auto;
+     justify-content: space-around;
 }
