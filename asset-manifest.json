@@ -1,24 +1,25 @@
 {
   "files": {
-    "main.css": "/sofa_constructor/static/css/main.d4df979c.chunk.css",
-    "main.js": "/sofa_constructor/static/js/main.27ab04bd.chunk.js",
-    "main.js.map": "/sofa_constructor/static/js/main.27ab04bd.chunk.js.map",
+    "main.css": "/sofa_constructor/static/css/main.f0c765a2.chunk.css",
+    "main.js": "/sofa_constructor/static/js/main.35b2f30e.chunk.js",
+    "main.js.map": "/sofa_constructor/static/js/main.35b2f30e.chunk.js.map",
     "runtime-main.js": "/sofa_constructor/static/js/runtime-main.c30abd2b.js",
     "runtime-main.js.map": "/sofa_constructor/static/js/runtime-main.c30abd2b.js.map",
-    "static/js/2.27be8a3c.chunk.js": "/sofa_constructor/static/js/2.27be8a3c.chunk.js",
-    "static/js/2.27be8a3c.chunk.js.map": "/sofa_constructor/static/js/2.27be8a3c.chunk.js.map",
+    "static/js/2.a871d70b.chunk.js": "/sofa_constructor/static/js/2.a871d70b.chunk.js",
+    "static/js/2.a871d70b.chunk.js.map": "/sofa_constructor/static/js/2.a871d70b.chunk.js.map",
     "index.html": "/sofa_constructor/index.html",
-    "precache-manifest.76477f99fc28f603793f5e740b109c3a.js": "/sofa_constructor/precache-manifest.76477f99fc28f603793f5e740b109c3a.js",
+    "precache-manifest.b925fec308542e82a60d43d26a311fce.js": "/sofa_constructor/precache-manifest.b925fec308542e82a60d43d26a311fce.js",
     "service-worker.js": "/sofa_constructor/service-worker.js",
-    "static/css/main.d4df979c.chunk.css.map": "/sofa_constructor/static/css/main.d4df979c.chunk.css.map",
-    "static/js/2.27be8a3c.chunk.js.LICENSE.txt": "/sofa_constructor/static/js/2.27be8a3c.chunk.js.LICENSE.txt",
+    "static/css/main.f0c765a2.chunk.css.map": "/sofa_constructor/static/css/main.f0c765a2.chunk.css.map",
+    "static/js/2.a871d70b.chunk.js.LICENSE.txt": "/sofa_constructor/static/js/2.a871d70b.chunk.js.LICENSE.txt",
     "static/media/Stage2.css": "/sofa_constructor/static/media/3.91991c6e.png",
+    "static/media/App.css": "/sofa_constructor/static/media/door-right.a161b0a1.png",
     "static/media/Stage1.css": "/sofa_constructor/static/media/room.3cae9773.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.c30abd2b.js",
-    "static/js/2.27be8a3c.chunk.js",
-    "static/css/main.d4df979c.chunk.css",
-    "static/js/main.27ab04bd.chunk.js"
+    "static/js/2.a871d70b.chunk.js",
+    "static/css/main.f0c765a2.chunk.css",
+    "static/js/main.35b2f30e.chunk.js"
   ]
 }

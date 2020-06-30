@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "607c6a107743dec954062d4915de70e3",
+    "revision": "d7381c8f482a9f116d137265e9cf6f0f",
     "url": "/sofa_constructor/index.html"
   },
   {
-    "revision": "b48aa501004f38f05b3f",
-    "url": "/sofa_constructor/static/css/main.d4df979c.chunk.css"
+    "revision": "e5a2eba51c4625d65a7a",
+    "url": "/sofa_constructor/static/css/main.f0c765a2.chunk.css"
   },
   {
-    "revision": "b642775ed74682db623b",
-    "url": "/sofa_constructor/static/js/2.27be8a3c.chunk.js"
+    "revision": "c24a0a0753193e073197",
+    "url": "/sofa_constructor/static/js/2.a871d70b.chunk.js"
   },
   {
     "revision": "e88a3e95b5364d46e95b35ae8c0dc27d",
-    "url": "/sofa_constructor/static/js/2.27be8a3c.chunk.js.LICENSE.txt"
+    "url": "/sofa_constructor/static/js/2.a871d70b.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b48aa501004f38f05b3f",
-    "url": "/sofa_constructor/static/js/main.27ab04bd.chunk.js"
+    "revision": "e5a2eba51c4625d65a7a",
+    "url": "/sofa_constructor/static/js/main.35b2f30e.chunk.js"
   },
   {
     "revision": "2089741e07bc450b5e3b",
@@ -38,6 +38,14 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "91991c6e36ad7b7a12d53c0d1af4ad62",
     "url": "/sofa_constructor/static/media/3.91991c6e.png"
+  },
+  {
+    "revision": "9b1f075f71f0286370a24edf0a2935c8",
+    "url": "/sofa_constructor/static/media/door-left.9b1f075f.png"
+  },
+  {
+    "revision": "a161b0a189a2f59a36c97094e037a522",
+    "url": "/sofa_constructor/static/media/door-right.a161b0a1.png"
   },
   {
     "revision": "3cae9773c5ec7342aecab1bcf58404bb",
