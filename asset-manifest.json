@@ -1,25 +1,31 @@
 {
   "files": {
-    "main.css": "/sofa_constructor/static/css/main.f0c765a2.chunk.css",
-    "main.js": "/sofa_constructor/static/js/main.b1f86929.chunk.js",
-    "main.js.map": "/sofa_constructor/static/js/main.b1f86929.chunk.js.map",
+    "main.css": "/sofa_constructor/static/css/main.5d472935.chunk.css",
+    "main.js": "/sofa_constructor/static/js/main.5a771455.chunk.js",
+    "main.js.map": "/sofa_constructor/static/js/main.5a771455.chunk.js.map",
     "runtime-main.js": "/sofa_constructor/static/js/runtime-main.c30abd2b.js",
     "runtime-main.js.map": "/sofa_constructor/static/js/runtime-main.c30abd2b.js.map",
-    "static/js/2.a871d70b.chunk.js": "/sofa_constructor/static/js/2.a871d70b.chunk.js",
-    "static/js/2.a871d70b.chunk.js.map": "/sofa_constructor/static/js/2.a871d70b.chunk.js.map",
+    "static/js/2.14aa9cbb.chunk.js": "/sofa_constructor/static/js/2.14aa9cbb.chunk.js",
+    "static/js/2.14aa9cbb.chunk.js.map": "/sofa_constructor/static/js/2.14aa9cbb.chunk.js.map",
     "index.html": "/sofa_constructor/index.html",
-    "precache-manifest.63dca522132d405fbb635d431a2f7bd1.js": "/sofa_constructor/precache-manifest.63dca522132d405fbb635d431a2f7bd1.js",
+    "precache-manifest.ba14e089b10608edb54bf896ce107cff.js": "/sofa_constructor/precache-manifest.ba14e089b10608edb54bf896ce107cff.js",
     "service-worker.js": "/sofa_constructor/service-worker.js",
-    "static/css/main.f0c765a2.chunk.css.map": "/sofa_constructor/static/css/main.f0c765a2.chunk.css.map",
-    "static/js/2.a871d70b.chunk.js.LICENSE.txt": "/sofa_constructor/static/js/2.a871d70b.chunk.js.LICENSE.txt",
+    "static/css/main.5d472935.chunk.css.map": "/sofa_constructor/static/css/main.5d472935.chunk.css.map",
+    "static/js/2.14aa9cbb.chunk.js.LICENSE.txt": "/sofa_constructor/static/js/2.14aa9cbb.chunk.js.LICENSE.txt",
     "static/media/Stage2.css": "/sofa_constructor/static/media/3.91991c6e.png",
-    "static/media/App.css": "/sofa_constructor/static/media/door-right.a161b0a1.png",
-    "static/media/Stage1.css": "/sofa_constructor/static/media/room.3cae9773.jpg"
+    "static/media/None.png": "/sofa_constructor/static/media/None.575b9ee0.png",
+    "static/media/assy.png": "/sofa_constructor/static/media/assy.208457ce.png",
+    "static/media/heli-wit.png": "/sofa_constructor/static/media/heli-wit.fa0c8680.png",
+    "static/media/heli-zwart.png": "/sofa_constructor/static/media/heli-zwart.dc5d816a.png",
+    "static/media/hoek.png": "/sofa_constructor/static/media/hoek.71bb7154.png",
+    "static/media/lip.png": "/sofa_constructor/static/media/lip.c156dfa3.png",
+    "static/media/Stage1.css": "/sofa_constructor/static/media/room.3cae9773.jpg",
+    "static/media/square.png": "/sofa_constructor/static/media/square.7756f838.png"
   },
   "entrypoints": [
     "static/js/runtime-main.c30abd2b.js",
-    "static/js/2.a871d70b.chunk.js",
-    "static/css/main.f0c765a2.chunk.css",
-    "static/js/main.b1f86929.chunk.js"
+    "static/js/2.14aa9cbb.chunk.js",
+    "static/css/main.5d472935.chunk.css",
+    "static/js/main.5a771455.chunk.js"
   ]
 }
