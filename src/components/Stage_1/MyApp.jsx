@@ -131,9 +131,10 @@ export default class MyApp extends React.Component {
         this.totalSum = total;
 
     }
-
-    render() {
+    componentWillUpdate() {
         this.isSofaEmpty = this.state.sofa.some(a => a.empty === true)
+    }
+    render() {
 
         switch (this.state.step) {
             case 1:
