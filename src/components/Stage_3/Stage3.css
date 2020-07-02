@@ -1,0 +1,168 @@
+.lineUnderSofa {
+    position: absolute;
+    border-right: 4px dashed rgb(180, 184, 197);
+    border-left: 4px dashed rgb(180, 184, 197);
+    opacity: 1;
+    -webkit-transform: rotateY(0deg) rotateX(90deg) rotateZ(0deg);
+    box-sizing: border-box;
+}
+
+.colorSections {
+    display: flex;
+    height: 400px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.textInside {
+    position: absolute;
+    left: 50%;
+    margin-left: -20px;
+    top: 50%;
+    margin-top: -10px;
+}
+
+.innerColor {
+    height: 100%;
+    width: 50%;
+    position: relative;
+}
+
+.outerColor {
+    height: 100%;
+    width: 50%;
+    position: relative;
+}
+
+.sofaDoors {
+    position: absolute;
+    margin: auto 0;
+    box-sizing: border-box;
+}
+
+.door {
+    display: inline-block;
+    position: relative;
+    transform-style: preserve-3d;
+    opacity: 1;
+}
+
+.doorOpenLeft {
+    transform: perspective(400px) rotateY(-85deg);
+    transition: transform .5s, perspective .5s;
+    -webkit-transform-origin: left;
+}
+
+.doorLeft {
+    transition: transform .5s, perspective .5s;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    background-size: 100% 100%;
+    -webkit-transform-origin: left;
+}
+
+.doorRight {
+    transition: transform .5s, perspective .5s;
+    transform-origin: 0%;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    background-size: 100% 100%;
+    transform-origin: right;
+}
+
+.doorOpenRight {
+    transform: perspective(400px) rotateY(85deg);
+    transition: transform .5s, perspective .5s;
+    transform-origin: right;
+}
+
+.doorHandlerRight {
+    transition: transform .4s, ;
+    transform: translate(10px, 0);
+}
+
+.doorHandlerOpenRight {
+    transition: transform .3s, ;
+    transform: translate(70px, 0) rotateY(90deg);
+}
+
+.doorHandlerLeft {
+    transition: transform .5s, ;
+    transform: translate(0px, 0);
+}
+
+.doorHandlerOpenLeft {
+    transition: transform .3s, ;
+    transform: translate(-60px, 0) rotateY(-90deg);
+}
+
+.handlers {
+    margin: 0px auto;
+    text-align: center;
+}
+
+.handlers button {
+    margin: 10px;
+    position: relative;
+}
+
+.choosedHandler {
+    font-size: 30px;
+    color: rgb(127, 172, 255);
+    position: absolute;
+    left: 40px;
+    top: 30px;
+    background-color: rgb(255, 255, 255);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.handlers img {
+    width: 100px;
+    height: 100px;
+}
+
+/* Handler types */
+
+.assy {
+    background: rgb(32, 32, 32);
+    width: 4px;
+    height: 30px;
+    border-radius: 20%;
+}
+
+.square {
+    background: rgb(156, 156, 156);
+    width: 4px;
+    height: 30px;
+    border-radius: 20%;
+}
+
+.heli-wit {
+    background: rgb(156, 156, 156);
+    width: 8px;
+    height: 8px;
+    border-radius: 30%;
+}
+
+.heli-zwart {
+    background: rgb(32, 32, 32);
+    width: 8px;
+    height: 8px;
+    border-radius: 30%;
+}
+
+.hoek {
+    background: rgb(32, 32, 32);
+    width: 14px;
+    height: 14px;
+    border-radius: 20%;
+}
+
+.lip {
+    background: rgb(255, 220, 123);
+    width: 14px;
+    height: 14px;
+    border-radius: 20%;
+}

@@ -13,18 +13,24 @@ export default class MyApp extends React.Component {
         // this.nextStep = this.nextStep.bind(this);
 
         this.zoom = 1.5;
-        this.capacity = 0;
-        this.pieceWidth = 0;
+        this.capacity = null;
+        this.pieceWidth = null;
         this.isSofaEmpty = true;
         this.state = {
             step: 1,
-            sofaHeight: 0,
-            sofaWidth: 0,
-            sofaDeep: 0 ,
+            sofaHeight: null,
+            sofaWidth: null,
+            sofaDeep: null,
             showStageTwo: false,
-            sofa: this.sofaLength(this.capacity)
+            sofa: this.sofaLength(this.capacity),
+
+
         };
 
+        this.selectedInner = 5;
+        this.selectedOuter = 5;
+        this.selectedHandler = 'assy';
+        this.totalSum = null;
     }
     sofaLength(n) {
         const arr = [];
@@ -41,9 +47,9 @@ export default class MyApp extends React.Component {
 
         return (
             <div className="underSofaSides" style={{ width: this.state.sofaWidth, height: this.state.sofaHeight }} >
-                {array.map(v => {
+                {array.map((v, i) => {
                     return (
-                        <div style={{ width: this.pieceWidth, height: this.state.sofaHeight, }} >
+                        <div key={v + "-" + i} style={{ width: this.pieceWidth, height: this.state.sofaHeight, }} >
                             <div className='dashUnderline' style={{ width: this.pieceWidth, height: this.state.sofaHeight, top: this.state.sofaHeight / 2 }} ></div>
                         </div>
                     )
@@ -53,7 +59,7 @@ export default class MyApp extends React.Component {
     }
 
     handleInputChange(event) {
-        const value = +event.target.value*this.zoom;
+        const value = +event.target.value * this.zoom;
         const name = event.target.name;
         setTimeout(function () {
             this.setState({ [name]: value, sofa: this.sofaLength(this.capacity) });
@@ -79,7 +85,7 @@ export default class MyApp extends React.Component {
     };
 
     showStageOne() {
-        let calculation = this.state.sofaWidth / 50/this.zoom;
+        let calculation = this.state.sofaWidth / 50 / this.zoom;
         this.capacity = (calculation > 100) ? Math.round(calculation) : Math.floor(calculation)
         this.pieceWidth = this.state.sofaWidth / this.capacity;
         this.state.sofa = this.sofaLength(this.capacity)
@@ -87,20 +93,19 @@ export default class MyApp extends React.Component {
         return (
             <>
                 <div className="room">
-
                     <InputForm
                         sofaHeight={this.state.sofaHeight}
                         sofaWidth={this.state.sofaWidth}
                         sofaDeep={this.state.sofaDeep}
                         onsubmit={this.nextStep}
-                        onchange={this.handleInputChange} 
+                        onchange={this.handleInputChange}
                         zoom={this.zoom}
-                        />
+                    />
                 </div>
                 <InfoTab
-                    width={this.state.sofaWidth/this.zoom}
-                    height={this.state.sofaHeight/this.zoom}
-                    deep={this.state.sofaDeep/this.zoom}
+                    width={this.state.sofaWidth / this.zoom}
+                    height={this.state.sofaHeight / this.zoom}
+                    deep={this.state.sofaDeep / this.zoom}
                     capacity={this.capacity}
                 />
                 <div style={{ padding: 50, }}>
@@ -115,13 +120,20 @@ export default class MyApp extends React.Component {
             </>
         )
     }
-    updateSofa = (value) => {
-        this.setState({ sofa: value })
+    updateSofa = (value) => this.setState({ sofa: value })
+
+
+    updateDesign = (a, b, c, total) => {
+
+        this.selectedInner = a;
+        this.selectedOuter = b;
+        this.selectedHandler = c;
+        this.totalSum = total;
+
     }
 
     render() {
         this.isSofaEmpty = this.state.sofa.some(a => a.empty === true)
-        // console.log(window.innerWidth)
 
         switch (this.state.step) {
             case 1:
@@ -153,12 +165,28 @@ export default class MyApp extends React.Component {
                             pieceWidth={this.pieceWidth}
                             sofaHeight={this.state.sofaHeight}
                             sofaWidth={this.state.sofaWidth}
+                            capacity={this.capacity}
                             sofa={this.state.sofa}
+                            zoom={this.zoom}
+                            updateDesign={this.updateDesign}
+                            inner={this.selectedInner}
+                            outer={this.selectedOuter}
+                            handler={this.selectedHandler}
                         />
 
                         <div className="btnPos">
                             <button className="btnIn" style={styles.btn} onClick={this.prevStep}>Prev Stage</button>
-                            <button className="btnIn" style={styles.btn} onClick={this.nextStep} disabled={true}>Next Stage</button>
+                            <button className="btnIn" style={styles.btn} onClick={this.nextStep} >Send</button>
+                        </div>
+                    </>
+                );
+            case 4:
+                return (
+                    <>
+                        <div style={{ textAlign: "center" }}>
+                            <h1>Congratulation, your order is complete</h1>
+                            <h1>TOATL SUM TO PAY {this.totalSum} €</h1>
+                            <button className="btnIn" style={styles.btn} onClick={this.prevStep}>GO TO STAGE 1</button>
                         </div>
                     </>
                 );
