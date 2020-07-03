@@ -24,13 +24,14 @@ export default class MyApp extends React.Component {
             showStageTwo: false,
             sofa: this.sofaLength(this.capacity),
 
-
         };
 
         this.selectedInner = 5;
         this.selectedOuter = 5;
         this.selectedHandler = 'assy';
         this.totalSum = null;
+        this.doorsDirection = [];
+
     }
     sofaLength(n) {
         const arr = [];
@@ -70,6 +71,7 @@ export default class MyApp extends React.Component {
         event.preventDefault();
 
         const { step } = this.state;
+        // step ===2 & 
         this.setState({
             step: step + 1,
         });
@@ -121,6 +123,7 @@ export default class MyApp extends React.Component {
         )
     }
     updateSofa = (value) => this.setState({ sofa: value })
+    updateDoorsDirection = (val) => this.doorsDirection = val
 
 
     updateDesign = (a, b, c, total) => {
@@ -133,9 +136,15 @@ export default class MyApp extends React.Component {
     }
     componentWillUpdate() {
         this.isSofaEmpty = this.state.sofa.some(a => a.empty === true)
+        // console.log('componentWillUpdate',this.isSofaEmpty, this.state.sofa)
+    }
+    componentDidUpdate() {
+        // console.log('componentDidUpdate',this.isSofaEmpty, this.state.sofa)
+
     }
     render() {
 
+        // console.log('render',this.isSofaEmpty, this.state.sofa)
         switch (this.state.step) {
             case 1:
                 return this.showStageOne()
@@ -170,6 +179,7 @@ export default class MyApp extends React.Component {
                             sofa={this.state.sofa}
                             zoom={this.zoom}
                             updateDesign={this.updateDesign}
+                            updateDoorsDirection={this.updateDoorsDirection}
                             inner={this.selectedInner}
                             outer={this.selectedOuter}
                             handler={this.selectedHandler}
@@ -187,7 +197,8 @@ export default class MyApp extends React.Component {
                         <div style={{ textAlign: "center" }}>
                             <h1>Congratulation, your order is complete</h1>
                             <h1>TOATL SUM TO PAY {this.totalSum} €</h1>
-                            <button className="btnIn" style={styles.btn} onClick={this.prevStep}>GO TO STAGE 1</button>
+                            <h1>Doors sides: {this.doorsDirection.map((v, i) => ` ${v.i} `)}</h1>
+                            {/* <button className="btnIn" style={styles.btn} onClick={this.prevStep}>Prev Stage</button> */}
                         </div>
                     </>
                 );

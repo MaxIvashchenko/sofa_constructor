@@ -4,15 +4,18 @@ import { PieChart } from 'react-minimal-pie-chart';
 import HandlerButton from './HandlerButton';
 import InfoTab from '../Stage_2/InfoTab';
 import InfoTabColor from './InfoTabColor';
+import ReverseDoor from './ReverseDoor';
 
 // export default function Stage3() {
-export default function Stage3({ sofaWidth, sofaHeight, pieceWidth, pieceDeep, capacity, sofa, zoom, updateDesign ,inner, outer, handler}) {
-    const [door, setDoorState] = useState(false)
+export default function Stage3({ sofaWidth, sofaHeight, pieceWidth, pieceDeep, capacity, sofa, zoom, updateDesign, inner, outer, handler,updateDoorsDirection }) {
+    // const inner = 5;
+    // const outer = 5;
+    // const handler = 'assy';
 
+    const [door, setDoorState] = useState(false)
     const [selectedInner, setSelectedInner] = useState(inner);
     const [selectedOuter, setSelectedOuter] = useState(outer);
     const [selectedHandler, setSelectedHandler] = useState(handler);
-
     const palette = [
         { value: 1, color: 'rgb(135, 221, 233)', price: 115 },
         { value: 1, color: 'rgb(233, 207, 135)', price: 120 },
@@ -23,19 +26,20 @@ export default function Stage3({ sofaWidth, sofaHeight, pieceWidth, pieceDeep, c
         { value: 1, color: 'rgb(138, 105, 105)', price: 170 },
     ]
 
-
     // const sofa = [
     //     { side: "black", size: 2, id: 'black-1-1', model: 'model-2', empty: false, price: 110 },
     //     { side: "black", size: 1, id: 'black-1-2', model: 'model-3', empty: false, price: 120 },
     //     { side: "black", size: 2, id: 'black-1-1', model: 'model-2', empty: false, price: 110 },
     //     { side: "black", size: 1, id: 'black-1-0', model: 'model-1', empty: false, price: 100 },
     // ]
+
     // const sofaWidth = 450;
     // const sofaHeight = 300;
     // const pieceWidth = 75;
     // const capacity = 6;
     // const pieceDeep = 75;
     // const zoom = 1.5;
+
     const doorHandlers = [
         { img: require('../../images/handlers/assy.png'), name: 'assy', price: 20 },
         { img: require('../../images/handlers/square.png'), name: 'square', price: 22 },
@@ -46,12 +50,18 @@ export default function Stage3({ sofaWidth, sofaHeight, pieceWidth, pieceDeep, c
         { img: require('../../images/handlers/None.png'), name: 'none', price: 40 },
     ]
 
+    const doorsDirection = sofa.reduce((arr, current, i) => {
+        (current.size === 2) ? arr.push({ i: 'double' }) : arr.push({ i: 'dir' })
+        return arr
+    }, [])
     const clicker = (e) => setSelectedHandler(e)
     const getHandlerPrice = doorHandlers.filter(obj => obj.name === selectedHandler)[0].price
     const setColor = (index) => palette.filter((v, i) => i === index)[0].color
     const setPrice = (index) => palette.filter((v, i) => i === index)[0].price
     const totalSum = sofa.reduce((a, b) => a + b.price, 0) + setPrice(selectedInner) + setPrice(selectedOuter) + getHandlerPrice * capacity;
-    updateDesign(selectedInner, selectedOuter, selectedHandler, totalSum)
+    const editDoorDirection = (i, side) => doorsDirection.splice(i, 1, { i: side })
+    updateDoorsDirection(doorsDirection)
+    updateDesign(selectedInner,selectedOuter,selectedHandler,totalSum)
 
     return (
         <>
@@ -73,19 +83,12 @@ export default function Stage3({ sofaWidth, sofaHeight, pieceWidth, pieceDeep, c
 
                 <div className="sofaDoors" style={{ width: sofaWidth, height: sofaHeight, }}>
                     {sofa.map((v, i) => {
-                        if ((v.size === 1 && sofa.length - 1 === i) || (v.size === 1 && sofa[i - 1] && sofa[i - 1].size === 1)) {
-                            return (
-                                <div key={v.size + '-doorRight'} className="door" style={{ width: pieceWidth, height: sofaHeight }}>
-                                    <div className={door ? `doorRight doorOpenRight ` : `doorRight`} style={{ background: setColor(selectedOuter), width: pieceWidth, height: sofaHeight, }} />
-                                    <div className={door ? `doorHandlerRight  ${selectedHandler} doorHandlerOpenRight ` : `${selectedHandler} doorHandlerRight`} style={{ position: "absolute", top: sofaHeight / 2 }} />
-                                </div>
-                            )
-                        }
 
                         if (v.size === 2) {
+
                             return (
-                                <React.Fragment key={v.size + "-door-"+i}>
-                                    <div  className="door" style={{ width: pieceWidth, height: sofaHeight, }}>
+                                <React.Fragment key={v.size + "-door-" + i}>
+                                    <div className="door" style={{ width: pieceWidth, height: sofaHeight, }}>
                                         <div className={door ? `doorLeft doorOpenLeft ` : `doorLeft`} style={{ background: setColor(selectedOuter), width: pieceWidth, height: sofaHeight }} />
                                         <div className={door ? `doorHandlerLeft ${selectedHandler}  doorHandlerOpenLeft ` : `${selectedHandler} doorHandlerLeft`} style={{ position: "absolute", top: sofaHeight / 2, right: 10 }} />
                                     </div>
@@ -97,10 +100,19 @@ export default function Stage3({ sofaWidth, sofaHeight, pieceWidth, pieceDeep, c
                             )
                         } else {
                             return (
-                                <div key={v.size + "-doorLeft"} className="door" style={{ width: pieceWidth, height: sofaHeight, }}>
-                                    <div className={door ? `doorLeft doorOpenLeft ` : `doorLeft`} style={{ background: setColor(selectedOuter), width: pieceWidth, height: sofaHeight }} />
-                                    <div className={door ? `doorHandlerLeft  ${selectedHandler} doorHandlerOpenLeft ` : `${selectedHandler} doorHandlerLeft`} style={{ position: "absolute", top: sofaHeight / 2, right: 10 }} />
-                                </div>
+
+                                <ReverseDoor
+                                    index={i}
+                                    pieceWidth={pieceWidth}
+                                    sofaHeight={sofaHeight}
+                                    size={v.size}
+                                    selectedHandler={selectedHandler}
+                                    setColor={setColor}
+                                    editDoorDirection={editDoorDirection}
+                                    door={door}
+                                    selectedOuter={selectedOuter}
+                                />
+
                             )
                         }
                     })}

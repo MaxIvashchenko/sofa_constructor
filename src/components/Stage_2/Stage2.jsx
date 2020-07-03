@@ -49,11 +49,11 @@ class Stage2 extends Component {
 			],
 			x: 0,
 			colonka: null,
-			showDoubleModules: true,
+			showSingleModules: true,
 		}
 	}
 
-	
+
 	renderPiece(piece, rowIndex, colIndex, colonka) {
 		const makeClass = () => {
 			if (rowIndex === 2 && this.dragging) {
@@ -130,7 +130,7 @@ class Stage2 extends Component {
 	}
 	changeModule() {
 		this.setState(state => ({
-			showDoubleModules: !state.showDoubleModules
+			showSingleModules: !state.showSingleModules
 		}));
 	}
 
@@ -139,16 +139,21 @@ class Stage2 extends Component {
 		// console.log(this.props)
 		return (
 			<>
-				<ModuleTabChange onclick={this.changeModule} showDoubleModule={this.state.showDoubleModules} />
+				{this.newCapacity > 1 ?
+					<ModuleTabChange onclick={this.changeModule} showDoubleModule={this.state.showSingleModules} />
+					:
+					<div className="chooseModule"><div className={"moduleBtnAtcive"}>Simple modules</div></div>
+				}
+
 
 				{this.state.board.map((row, rowIndex) => {
 					if (rowIndex === 2) {
 						return (
 							<>
 								<InfoTab
-									width={this.withing/this.zoom}
-									height={this.pieceHeight/this.zoom}
-									deep={this.pieceDeep/this.zoom}
+									width={this.withing / this.zoom}
+									height={this.pieceHeight / this.zoom}
+									deep={this.pieceDeep / this.zoom}
 									capacity={this.newCapacity}
 									sofa={this.state.board[2]}
 								/>
@@ -159,7 +164,7 @@ class Stage2 extends Component {
 									style={{ width: this.withing }}
 									key={row + "-" + rowIndex}>
 
-									<div className="underSofa" style={{ width: this.withing, height: this.pieceHeight, perspective: 300, overflow: "hidden", padding: 40, top:-40 }}>
+									<div className="underSofa" style={{ width: this.withing, height: this.pieceHeight, perspective: 300, overflow: "hidden", padding: 40, top: -40 }}>
 										<div className="underSofaSides" style={{ width: this.withing }} >
 											{row.map((v, i) => {
 												return (
@@ -181,7 +186,7 @@ class Stage2 extends Component {
 												style={{ width: this.withing, top: this.pieceHeight, height: this.pieceWidth }}></div>
 										</div>
 									</div>
-									<div className="underSofa" style={{ width: this.withing, height: this.pieceHeight}}>
+									<div className="underSofa" style={{ width: this.withing, height: this.pieceHeight }}>
 										<div className="underSofaSides" style={{ width: this.withing }} >
 											{row.map((v, i) => {
 												if (v.empty) {
@@ -232,7 +237,7 @@ class Stage2 extends Component {
 					if (rowIndex === 1) {
 						return (
 							<>
-								{!this.state.showDoubleModules &&
+								{this.state.showSingleModules &&
 									<div className="singleModuleBox" key={rowIndex}>
 										{row.map((piece, colIndex) => {
 											return (
@@ -261,7 +266,7 @@ class Stage2 extends Component {
 
 					return (
 						<>
-							{this.state.showDoubleModules && <div className="doubleModuleBox" key={rowIndex}>
+							{!this.state.showSingleModules &&  <div className="doubleModuleBox" key={rowIndex}>
 								{row.map((piece, colIndex) => {
 
 									return (
@@ -491,7 +496,7 @@ class Stage2 extends Component {
 
 			}
 			if (this.state.board[2].reduce((a, b) => a + b.empty, 0) === 1) {
-				this.setState({ showDoubleModules: false })
+				this.setState({ showSingleModules: true })
 			}
 			this.setState(state => {
 				state.colonka = null
